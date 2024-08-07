@@ -1,0 +1,17 @@
+= Gravitee Policy mTLS
+
+== Phases
+
+[cols="4*", options="header"]
+|===
+^|onRequest
+^|onResponse
+^|onMessageRequest
+^|onMessageResponse
+
+^.^| X
+^.^|
+^.^|
+^.^|
+|===
+
