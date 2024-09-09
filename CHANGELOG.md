@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0-alpha.2...1.0.0-alpha.3) (2024-09-09)
+
+
+### Bug Fixes
+
+* change token validity for invalid cert ([4719391](https://github.com/gravitee-io/gravitee-policy-mtls/commit/47193918db5099203d65bb79754a78fedd972607))
+
 # [1.0.0-alpha.2](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0-alpha.1...1.0.0-alpha.2) (2024-09-05)
 
 
