@@ -126,7 +126,15 @@ class MtlsPolicyTest {
                 }
             );
 
-            cut.extractSecurityToken(ctx).test().assertComplete().assertNoValues();
+            cut
+                .extractSecurityToken(ctx)
+                .test()
+                .assertComplete()
+                .assertValue(s -> {
+                    assertThat(s.getTokenType()).isEqualTo(SecurityToken.TokenType.CERTIFICATE.name());
+                    assertThat(s.isInvalid()).isTrue();
+                    return true;
+                });
         }
 
         @Test
