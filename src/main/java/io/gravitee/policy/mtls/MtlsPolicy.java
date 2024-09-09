@@ -91,7 +91,7 @@ public class MtlsPolicy implements SecurityPolicy {
         try {
             clientCertificate = DigestUtils.md5DigestAsHex(peerCertificates[0].getEncoded());
         } catch (CertificateEncodingException e) {
-            return Maybe.empty();
+            return Maybe.just(SecurityToken.invalid(SecurityToken.TokenType.CERTIFICATE));
         }
         return Maybe.just(SecurityToken.forClientCertificate(clientCertificate));
     }
