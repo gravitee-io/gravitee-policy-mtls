@@ -23,7 +23,7 @@
 
     <groupId>io.gravitee.policy</groupId>
     <artifactId>gravitee-policy-mtls</artifactId>
-    <version>1.0.0-alpha.3</version>
+    <version>1.0.0-alpha.4</version>
 
     <name>Gravitee.io APIM - Policy - mTLS</name>
     <description>Check client certificate against gateway trusted certificates, allowing only consumers with trusted certificates to access your APIs</description>
