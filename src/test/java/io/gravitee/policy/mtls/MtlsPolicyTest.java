@@ -20,6 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import io.gravitee.common.http.HttpStatusCode;
+import io.gravitee.gateway.reactive.api.context.TlsSession;
 import io.gravitee.gateway.reactive.api.policy.SecurityToken;
 import io.gravitee.gateway.reactive.core.context.AbstractRequest;
 import io.gravitee.gateway.reactive.core.context.AbstractResponse;
@@ -30,7 +31,6 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.util.List;
 import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLSession;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -65,10 +65,10 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
-                        when(sslSession.getPeerCertificates()).thenThrow(SSLPeerUnverifiedException.class);
-                        return sslSession;
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
+                        when(tlsSession.getPeerCertificates()).thenThrow(SSLPeerUnverifiedException.class);
+                        return tlsSession;
                     }
                 }
             );
@@ -82,10 +82,10 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
-                        when(sslSession.getPeerCertificates()).thenReturn(null);
-                        return sslSession;
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
+                        when(tlsSession.getPeerCertificates()).thenReturn(null);
+                        return tlsSession;
                     }
                 }
             );
@@ -99,10 +99,10 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
-                        when(sslSession.getPeerCertificates()).thenReturn(new Certificate[0]);
-                        return sslSession;
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
+                        when(tlsSession.getPeerCertificates()).thenReturn(new Certificate[0]);
+                        return tlsSession;
                     }
                 }
             );
@@ -116,12 +116,12 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
                         final Certificate certificate = mock(Certificate.class);
                         when(certificate.getEncoded()).thenThrow(CertificateEncodingException.class);
-                        when(sslSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
-                        return sslSession;
+                        when(tlsSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
+                        return tlsSession;
                     }
                 }
             );
@@ -143,12 +143,12 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
                         final Certificate certificate = mock(Certificate.class);
                         when(certificate.getEncoded()).thenReturn("a-certificate".getBytes());
-                        when(sslSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
-                        return sslSession;
+                        when(tlsSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
+                        return tlsSession;
                     }
                 }
             );
@@ -189,10 +189,10 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
-                        when(sslSession.getPeerCertificates()).thenThrow(SSLPeerUnverifiedException.class);
-                        return sslSession;
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
+                        when(tlsSession.getPeerCertificates()).thenThrow(SSLPeerUnverifiedException.class);
+                        return tlsSession;
                     }
                 }
             );
@@ -215,10 +215,10 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
-                        when(sslSession.getPeerCertificates()).thenReturn(null);
-                        return sslSession;
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
+                        when(tlsSession.getPeerCertificates()).thenReturn(null);
+                        return tlsSession;
                     }
                 }
             );
@@ -241,10 +241,10 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
-                        when(sslSession.getPeerCertificates()).thenReturn(new Certificate[0]);
-                        return sslSession;
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
+                        when(tlsSession.getPeerCertificates()).thenReturn(new Certificate[0]);
+                        return tlsSession;
                     }
                 }
             );
@@ -267,11 +267,11 @@ class MtlsPolicyTest {
                 new AbstractRequest() {
                     @SneakyThrows
                     @Override
-                    public SSLSession sslSession() {
-                        final SSLSession sslSession = mock(SSLSession.class);
+                    public TlsSession tlsSession() {
+                        final TlsSession tlsSession = mock(TlsSession.class);
                         final Certificate certificate = mock(Certificate.class);
-                        when(sslSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
-                        return sslSession;
+                        when(tlsSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
+                        return tlsSession;
                     }
                 }
             );

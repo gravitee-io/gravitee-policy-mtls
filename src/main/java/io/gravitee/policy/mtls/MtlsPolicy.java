@@ -34,6 +34,7 @@ package io.gravitee.policy.mtls;
 import io.gravitee.common.http.HttpStatusCode;
 import io.gravitee.gateway.reactive.api.ExecutionFailure;
 import io.gravitee.gateway.reactive.api.context.HttpExecutionContext;
+import io.gravitee.gateway.reactive.api.context.TlsSession;
 import io.gravitee.gateway.reactive.api.policy.SecurityPolicy;
 import io.gravitee.gateway.reactive.api.policy.SecurityToken;
 import io.gravitee.policy.mtls.configuration.MtlsPolicyConfiguration;
@@ -41,9 +42,7 @@ import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.security.cert.X509Certificate;
 import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;
 
@@ -71,14 +70,14 @@ public class MtlsPolicy implements SecurityPolicy {
 
     @Override
     public Maybe<SecurityToken> extractSecurityToken(HttpExecutionContext ctx) {
-        final SSLSession sslSession = ctx.request().sslSession();
-        if (sslSession == null) {
+        final TlsSession tlsSession = ctx.request().tlsSession();
+        if (tlsSession == null) {
             return Maybe.empty();
         }
 
         final Certificate[] peerCertificates;
         try {
-            peerCertificates = sslSession.getPeerCertificates();
+            peerCertificates = tlsSession.getPeerCertificates();
         } catch (SSLPeerUnverifiedException e) {
             return Maybe.empty();
         }
@@ -113,13 +112,13 @@ public class MtlsPolicy implements SecurityPolicy {
 
     @Override
     public Completable onRequest(HttpExecutionContext ctx) {
-        final SSLSession sslSession = ctx.request().sslSession();
-        if (sslSession == null) {
+        final TlsSession tlsSession = ctx.request().tlsSession();
+        if (tlsSession == null) {
             return interruptWith401(ctx, SSL_SESSION_REQUIRED);
         }
         final Certificate[] certificates;
         try {
-            certificates = sslSession.getPeerCertificates();
+            certificates = tlsSession.getPeerCertificates();
         } catch (SSLPeerUnverifiedException e) {
             return interruptWith401(ctx, CLIENT_CERTIFICATE_INVALID);
         }
