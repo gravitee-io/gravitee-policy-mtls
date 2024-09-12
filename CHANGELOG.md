@@ -1,3 +1,10 @@
+# [1.0.0-alpha.4](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0-alpha.3...1.0.0-alpha.4) (2024-09-12)
+
+
+### Features
+
+* rely on tls session to check client certificate ([479f022](https://github.com/gravitee-io/gravitee-policy-mtls/commit/479f0220663ca78c993aeb6f08b6bcf168a53e89))
+
 # [1.0.0-alpha.3](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0-alpha.2...1.0.0-alpha.3) (2024-09-09)
 
 
