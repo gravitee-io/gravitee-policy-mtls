@@ -1,3 +1,19 @@
+# 1.0.0 (2024-09-13)
+
+
+### Bug Fixes
+
+* change token validity for invalid cert ([4ae7ada](https://github.com/gravitee-io/gravitee-policy-mtls/commit/4ae7ada01e73340f92cb7ab3a11b1aee3675f70f))
+
+
+### Features
+
+* change mtls  logo ([b026a06](https://github.com/gravitee-io/gravitee-policy-mtls/commit/b026a064efe8d7b0fb552cb8d87f3b7043853733))
+* complete README ([742f6e9](https://github.com/gravitee-io/gravitee-policy-mtls/commit/742f6e9f25160d376c0e6f4975134b3889d16699))
+* implement mTLS policy ([3086876](https://github.com/gravitee-io/gravitee-policy-mtls/commit/30868765e2c8a4873781e0fc81ae6af00a3aad88))
+* init no op mtls policy ([bc353ab](https://github.com/gravitee-io/gravitee-policy-mtls/commit/bc353ab7af5989369c94a7e25adab98f5dd5380c))
+* rely on tls session to check client certificate ([60b6516](https://github.com/gravitee-io/gravitee-policy-mtls/commit/60b6516321b244b5bd13face7ce685db678ea2e3))
+
 # [1.0.0-alpha.4](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0-alpha.3...1.0.0-alpha.4) (2024-09-12)
 
 
