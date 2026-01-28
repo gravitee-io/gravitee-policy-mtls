@@ -27,6 +27,7 @@ import io.gravitee.gateway.reactive.core.context.AbstractResponse;
 import io.gravitee.gateway.reactive.core.context.DefaultExecutionContext;
 import io.gravitee.gateway.reactive.core.context.interruption.InterruptionFailureException;
 import io.gravitee.policy.mtls.configuration.MtlsPolicyConfiguration;
+import io.gravitee.reporter.api.v4.metric.Metrics;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.util.List;
@@ -282,6 +283,7 @@ class MtlsPolicyTest {
 
     private static DefaultExecutionContext prepareContext(AbstractRequest request) {
         final DefaultExecutionContext ctx = new DefaultExecutionContext(request, new AbstractResponse() {});
+        ctx.metrics(mock(Metrics.class));
         return ctx;
     }
 }

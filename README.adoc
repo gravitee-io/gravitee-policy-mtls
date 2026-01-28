@@ -29,7 +29,8 @@ This policy does not ensure that certificates are valid, since it is done direct
 
 |===
 | Plugin version | APIM version
-| 1.x            | 4.5 to latest
+| 2.x            | 4.10 to latest
+| 1.x            | 4.5 to 4.9
 |===
 
 == Errors
