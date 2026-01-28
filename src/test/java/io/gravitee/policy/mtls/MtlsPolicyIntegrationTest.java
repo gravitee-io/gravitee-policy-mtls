@@ -27,6 +27,7 @@ import io.gravitee.apim.gateway.tests.sdk.annotations.GatewayTest;
 import io.gravitee.apim.gateway.tests.sdk.configuration.GatewayConfigurationBuilder;
 import io.gravitee.apim.gateway.tests.sdk.connector.EndpointBuilder;
 import io.gravitee.apim.gateway.tests.sdk.connector.EntrypointBuilder;
+import io.gravitee.apim.gateway.tests.sdk.parameters.GatewayDynamicConfig;
 import io.gravitee.common.http.HttpStatusCode;
 import io.gravitee.node.api.certificate.KeyStoreLoader;
 import io.gravitee.plugin.endpoint.EndpointConnectorPlugin;
@@ -82,10 +83,10 @@ public class MtlsPolicyIntegrationTest {
         }
 
         @Test
-        protected void should_be_unauthorized_if_no_certificate_on_request(Vertx vertx) {
+        protected void should_be_unauthorized_if_no_certificate_on_request(Vertx vertx, GatewayDynamicConfig.HttpConfig httpConfig) {
             wiremock.stubFor(get("/endpoint").willReturn(ok("backend response")));
 
-            createTrustedHttpClient(vertx, false)
+            createTrustedHttpClient(vertx, false, httpConfig)
                 .rxRequest(HttpMethod.GET, "/test")
                 .flatMap(HttpClientRequest::rxSend)
                 .flatMap(response -> {
@@ -102,10 +103,10 @@ public class MtlsPolicyIntegrationTest {
         }
 
         @Test
-        protected void should_call_the_api_with_a_certificate_on_request(Vertx vertx) {
+        protected void should_call_the_api_with_a_certificate_on_request(Vertx vertx, GatewayDynamicConfig.HttpConfig httpConfig) {
             wiremock.stubFor(get("/endpoint").willReturn(ok("backend response")));
 
-            createTrustedHttpClient(vertx, true)
+            createTrustedHttpClient(vertx, true, httpConfig)
                 .rxRequest(HttpMethod.GET, "/test")
                 .flatMap(HttpClientRequest::rxSend)
                 .flatMap(response -> {
@@ -121,13 +122,16 @@ public class MtlsPolicyIntegrationTest {
             wiremock.verify(1, getRequestedFor(urlPathEqualTo("/endpoint")));
         }
 
-        HttpClient createTrustedHttpClient(Vertx vertx, boolean withCert) {
-            var options = new HttpClientOptions().setSsl(true).setTrustAll(true).setDefaultPort(gatewayPort()).setDefaultHost("localhost");
+        HttpClient createTrustedHttpClient(Vertx vertx, boolean withCert, GatewayDynamicConfig.HttpConfig httpConfig) {
+            var options = new HttpClientOptions()
+                .setSsl(true)
+                .setTrustAll(true)
+                .setDefaultPort(httpConfig.httpPort())
+                .setDefaultHost("localhost");
             if (withCert) {
-                options =
-                    options.setPemKeyCertOptions(
-                        new PemKeyCertOptions().addCertPath(getUrl("client.cer").getPath()).addKeyPath(getUrl("client.key").getPath())
-                    );
+                options = options.setPemKeyCertOptions(
+                    new PemKeyCertOptions().addCertPath(getUrl("client.cer").getPath()).addKeyPath(getUrl("client.key").getPath())
+                );
             }
 
             return vertx.createHttpClient(options);

@@ -33,10 +33,10 @@ package io.gravitee.policy.mtls;
 
 import io.gravitee.common.http.HttpStatusCode;
 import io.gravitee.gateway.reactive.api.ExecutionFailure;
-import io.gravitee.gateway.reactive.api.context.HttpExecutionContext;
 import io.gravitee.gateway.reactive.api.context.TlsSession;
-import io.gravitee.gateway.reactive.api.policy.SecurityPolicy;
+import io.gravitee.gateway.reactive.api.context.http.HttpPlainExecutionContext;
 import io.gravitee.gateway.reactive.api.policy.SecurityToken;
+import io.gravitee.gateway.reactive.api.policy.http.HttpSecurityPolicy;
 import io.gravitee.policy.mtls.configuration.MtlsPolicyConfiguration;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
@@ -51,7 +51,7 @@ import org.springframework.util.DigestUtils;
  * @author GraviteeSource Team
  */
 @Slf4j
-public class MtlsPolicy implements SecurityPolicy {
+public class MtlsPolicy implements HttpSecurityPolicy {
 
     public static final String CLIENT_CERTIFICATE_MISSING = "CLIENT_CERTIFICATE_MISSING";
     public static final String CLIENT_CERTIFICATE_INVALID = "CLIENT_CERTIFICATE_INVALID";
@@ -69,7 +69,7 @@ public class MtlsPolicy implements SecurityPolicy {
     }
 
     @Override
-    public Maybe<SecurityToken> extractSecurityToken(HttpExecutionContext ctx) {
+    public Maybe<SecurityToken> extractSecurityToken(HttpPlainExecutionContext ctx) {
         final TlsSession tlsSession = ctx.request().tlsSession();
         if (tlsSession == null) {
             return Maybe.empty();
@@ -111,7 +111,7 @@ public class MtlsPolicy implements SecurityPolicy {
     }
 
     @Override
-    public Completable onRequest(HttpExecutionContext ctx) {
+    public Completable onRequest(HttpPlainExecutionContext ctx) {
         final TlsSession tlsSession = ctx.request().tlsSession();
         if (tlsSession == null) {
             return interruptWith401(ctx, SSL_SESSION_REQUIRED);
@@ -128,7 +128,7 @@ public class MtlsPolicy implements SecurityPolicy {
         return Completable.complete();
     }
 
-    private static Completable interruptWith401(HttpExecutionContext ctx, String errorKey) {
+    private static Completable interruptWith401(HttpPlainExecutionContext ctx, String errorKey) {
         return ctx.interruptWith(new ExecutionFailure(HttpStatusCode.UNAUTHORIZED_401).key(errorKey).message(FAILURE_MESSAGE));
     }
 }

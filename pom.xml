@@ -31,17 +31,12 @@
     <parent>
         <groupId>io.gravitee</groupId>
         <artifactId>gravitee-parent</artifactId>
-        <version>22.1.5</version>
+        <version>23.5.0</version>
     </parent>
 
     <properties>
-        <gravitee-bom.version>8.1.0</gravitee-bom.version>
-        <gravitee-gateway-api.version>3.8.0</gravitee-gateway-api.version>
-        <gravitee-reporter-api.version>1.31.1</gravitee-reporter-api.version>
-        <gravitee-policy-api.version>1.11.0</gravitee-policy-api.version>
-        <gravitee-apim.version>4.5.0-SNAPSHOT</gravitee-apim.version>
+        <gravitee-apim.version>4.10.1</gravitee-apim.version>
 
-        <maven-plugin-assembly.version>3.5.0</maven-plugin-assembly.version>
         <maven-plugin-properties.version>1.1.0</maven-plugin-properties.version>
 
         <!-- Property used by the publication job in CI-->
@@ -52,29 +47,11 @@
         <dependencies>
             <!-- Import bom to properly inherit all dependencies -->
             <dependency>
-                <groupId>io.gravitee</groupId>
-                <artifactId>gravitee-bom</artifactId>
-                <version>${gravitee-bom.version}</version>
+                <groupId>io.gravitee.apim</groupId>
+                <artifactId>gravitee-apim-bom</artifactId>
+                <version>${gravitee-apim.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>io.gravitee.gateway</groupId>
-                <artifactId>gravitee-gateway-api</artifactId>
-                <version>${gravitee-gateway-api.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.gravitee.policy</groupId>
-                <artifactId>gravitee-policy-api</artifactId>
-                <version>${gravitee-policy-api.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.gravitee.reporter</groupId>
-                <artifactId>gravitee-reporter-api</artifactId>
-                <version>${gravitee-reporter-api.version}</version>
-                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -84,16 +61,19 @@
         <dependency>
             <groupId>io.gravitee.gateway</groupId>
             <artifactId>gravitee-gateway-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>io.gravitee.reporter</groupId>
             <artifactId>gravitee-reporter-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>io.gravitee.policy</groupId>
             <artifactId>gravitee-policy-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Logging -->
@@ -173,7 +153,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>${maven-plugin-assembly.version}</version>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
