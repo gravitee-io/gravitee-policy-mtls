@@ -1,3 +1,10 @@
+# [2.0.0-alpha.2](https://github.com/gravitee-io/gravitee-policy-mtls/compare/2.0.0-alpha.1...2.0.0-alpha.2) (2026-01-30)
+
+
+### Features
+
+* introduce MtlsPolicyException for improved error handling in mTLS validation ([7faa94e](https://github.com/gravitee-io/gravitee-policy-mtls/commit/7faa94e6a9981a04fedd5d73e01bfc89b2e868de))
+
 # [2.0.0-alpha.1](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0...2.0.0-alpha.1) (2026-01-30)
 
 
