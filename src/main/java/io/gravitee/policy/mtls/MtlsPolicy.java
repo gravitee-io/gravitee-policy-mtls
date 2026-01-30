@@ -40,6 +40,7 @@ import io.gravitee.gateway.reactive.api.policy.SecurityToken;
 import io.gravitee.gateway.reactive.api.policy.http.HttpSecurityPolicy;
 import io.gravitee.gateway.reactive.api.policy.kafka.KafkaSecurityPolicy;
 import io.gravitee.policy.mtls.configuration.MtlsPolicyConfiguration;
+import io.gravitee.policy.mtls.exception.MtlsPolicyException;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
 import java.security.cert.Certificate;
@@ -114,7 +115,9 @@ public class MtlsPolicy implements HttpSecurityPolicy, KafkaSecurityPolicy {
             final CertificateValidationResult result = validateClientCertificate(tlsSession);
             if (!result.isValid()) {
                 log.debug("Certificate validation failed for Kafka connection: {}", result.errorKey());
-                return Completable.error(new Exception(result.errorKey()));
+                return Completable.error(
+                    new MtlsPolicyException(String.format("Certificate validation failed for Kafka connection: %s", result.errorKey()))
+                );
             }
             return Completable.complete();
         });
