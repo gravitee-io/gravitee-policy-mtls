@@ -13,18 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.mtls.configuration;
-
-import io.gravitee.policy.api.PolicyConfiguration;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package io.gravitee.policy.mtls.exception;
 
 /**
- * @author Yann TAVERNIER (yann.tavernier at graviteesource.com)
  * @author GraviteeSource Team
  */
-@Getter
-@Setter
-@NoArgsConstructor
-public class MtlsPolicyConfiguration implements PolicyConfiguration {}
+public class MtlsPolicyException extends Exception {
+
+    public MtlsPolicyException(String message) {
+        super(message);
+    }
+}
