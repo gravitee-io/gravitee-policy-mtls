@@ -1,0 +1,7 @@
+rows:
+    - data:
+          key: CLIENT_CERTIFICATE_MISSING
+    - data:
+          key: CLIENT_CERTIFICATE_INVALID
+    - data:
+          key: SSL_SESSION_REQUIRED
