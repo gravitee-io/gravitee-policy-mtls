@@ -63,6 +63,18 @@ Strikethrough text indicates that a version is deprecated.
 
 ## Changelog
 
+### [2.0.0-alpha.3](https://github.com/gravitee-io/gravitee-policy-mtls/compare/2.0.0-alpha.2...2.0.0-alpha.3) (2026-02-06)
+
+
+##### Features
+
+* use SHA-256 for stronger digests ([d373963](https://github.com/gravitee-io/gravitee-policy-mtls/commit/d37396308d87a511c7cda925d59341b9aeca72cd))
+
+
+##### BREAKING CHANGES
+
+* for 4.11 and above only
+
 ### [2.0.0-alpha.2](https://github.com/gravitee-io/gravitee-policy-mtls/compare/2.0.0-alpha.1...2.0.0-alpha.2) (2026-01-30)
 
 
