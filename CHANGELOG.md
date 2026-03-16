@@ -1,3 +1,23 @@
+# [2.0.0](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0...2.0.0) (2026-03-16)
+
+
+### Bug Fixes
+
+* enhance MTLS policy to support Kafka connections and improve certificate validation ([0d09a8f](https://github.com/gravitee-io/gravitee-policy-mtls/commit/0d09a8fb1327a11b1781ffd5e2f77422c6912dcb))
+
+
+### Features
+
+* introduce MtlsPolicyException for improved error handling in mTLS validation ([daf6399](https://github.com/gravitee-io/gravitee-policy-mtls/commit/daf6399e9e20cc972153c157fde3c7dbc31c8946))
+* update dependencies in order to make it compatible with native kafka ([d6595b9](https://github.com/gravitee-io/gravitee-policy-mtls/commit/d6595b9379c62f1fe601beb6d76c610bd8b6f646))
+* use SHA-256 for stronger digests ([184bb9b](https://github.com/gravitee-io/gravitee-policy-mtls/commit/184bb9b39050d81f2e3298650bca4555a6d11adc))
+
+
+### BREAKING CHANGES
+
+* for 4.11 and above only
+* This policy is compatible with APIM 4.10 minimum
+
 # 1.0.0 (2024-09-13)
 
 
