@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/gravitee-io/gravitee-policy-mtls/compare/2.0.0...2.0.1) (2026-03-24)
+
+
+### Bug Fixes
+
+* revert breaking change commit ([eae6c29](https://github.com/gravitee-io/gravitee-policy-mtls/commit/eae6c29ca01bb87893eec902cfc91009486da5d1))
+
 # [2.0.0](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0...2.0.0) (2026-03-16)
 
 
