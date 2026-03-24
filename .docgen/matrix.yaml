@@ -1,8 +1,0 @@
-# MANDATORY
-rows:
-    - data:
-          plugin: "2.x"
-          apim: "4.11.x and above"
-    - data:
-          plugin: "1.x"
-          apim: "4.10.x and below"

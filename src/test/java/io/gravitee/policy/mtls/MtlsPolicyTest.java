@@ -30,7 +30,6 @@ import io.gravitee.policy.mtls.configuration.MtlsPolicyConfiguration;
 import io.gravitee.reporter.api.v4.metric.Metrics;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.security.cert.X509Certificate;
 import java.util.List;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import lombok.SneakyThrows;
@@ -120,7 +119,7 @@ class MtlsPolicyTest {
                     @Override
                     public TlsSession tlsSession() {
                         final TlsSession tlsSession = mock(TlsSession.class);
-                        final X509Certificate certificate = mock(X509Certificate.class);
+                        final Certificate certificate = mock(Certificate.class);
                         when(certificate.getEncoded()).thenThrow(CertificateEncodingException.class);
                         when(tlsSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
                         return tlsSession;
@@ -147,7 +146,7 @@ class MtlsPolicyTest {
                     @Override
                     public TlsSession tlsSession() {
                         final TlsSession tlsSession = mock(TlsSession.class);
-                        final X509Certificate certificate = mock(X509Certificate.class);
+                        final Certificate certificate = mock(Certificate.class);
                         when(certificate.getEncoded()).thenReturn("a-certificate".getBytes());
                         when(tlsSession.getPeerCertificates()).thenReturn(List.of(certificate).toArray(new Certificate[0]));
                         return tlsSession;

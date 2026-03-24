@@ -32,7 +32,6 @@ package io.gravitee.policy.mtls;
  */
 
 import io.gravitee.common.http.HttpStatusCode;
-import io.gravitee.common.security.CertificateUtils;
 import io.gravitee.gateway.reactive.api.ExecutionFailure;
 import io.gravitee.gateway.reactive.api.context.TlsSession;
 import io.gravitee.gateway.reactive.api.context.http.HttpPlainExecutionContext;
@@ -45,9 +44,10 @@ import io.gravitee.policy.mtls.exception.MtlsPolicyException;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
 import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
+import java.security.cert.CertificateEncodingException;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.DigestUtils;
 
 /**
  * @author Yann TAVERNIER (yann.tavernier at graviteesource.com)
@@ -154,12 +154,11 @@ public class MtlsPolicy implements HttpSecurityPolicy, KafkaSecurityPolicy {
             return Maybe.empty();
         }
 
-        if (result.certificates()[0] instanceof X509Certificate x509Certificate) {
-            String clientCertificate = CertificateUtils.generateThumbprint(x509Certificate, "SHA-256");
-            if (clientCertificate != null) {
-                return Maybe.just(SecurityToken.forClientCertificate(clientCertificate));
-            }
+        try {
+            String clientCertificate = DigestUtils.md5DigestAsHex(result.certificates()[0].getEncoded());
+            return Maybe.just(SecurityToken.forClientCertificate(clientCertificate));
+        } catch (CertificateEncodingException e) {
+            return Maybe.just(SecurityToken.invalid(SecurityToken.TokenType.CERTIFICATE));
         }
-        return Maybe.just(SecurityToken.invalid(SecurityToken.TokenType.CERTIFICATE));
     }
 }
