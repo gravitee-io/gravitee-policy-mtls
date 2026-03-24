@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/gravitee-io/gravitee-policy-mtls/compare/2.0.1...3.0.0) (2026-03-24)
+
+
+### Features
+
+* use sha-256 for stronger digests ([4fb89ef](https://github.com/gravitee-io/gravitee-policy-mtls/commit/4fb89ef7c18cc0ca1d4fa01cb896f8f99d7c2d3b))
+
+
+### BREAKING CHANGES
+
+* for 4.11 and above only.
+
 ## [2.0.1](https://github.com/gravitee-io/gravitee-policy-mtls/compare/2.0.0...2.0.1) (2026-03-24)
 
 
