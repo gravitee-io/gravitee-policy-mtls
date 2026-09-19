@@ -41,11 +41,11 @@ The `mtls` policy can be applied to the following API types and flow phases.
 ## Compatibility matrix
 Strikethrough text indicates that a version is deprecated.
 
-| Plugin version| APIM |
-| --- | ---  |
-|3.x|4.11.x and above |
-|2.x|4.10.x |
-|1.x|4.9.x and below |
+| Plugin version| APIM| Java version |
+| --- | --- | ---  |
+|3.x|4.11.x and above|21 |
+|2.x|4.10.x|21 |
+|1.x|4.9.x and below|17 |
 
 
 ## Configuration options
