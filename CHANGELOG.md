@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/gravitee-io/gravitee-policy-mtls/compare/1.0.0...1.0.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* depend on the released APIM 4.5.0 instead of a snapshot ([217ca1d](https://github.com/gravitee-io/gravitee-policy-mtls/commit/217ca1d5f26041476c6299cf6567ac86f82fd97b))
+
 # 1.0.0 (2024-09-13)
 
 
